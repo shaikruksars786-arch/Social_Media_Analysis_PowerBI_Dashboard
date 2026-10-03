@@ -454,3 +454,7 @@ By combining **KPIs, interactive filters, visual analysis, and business insights
 **Dashboard Pages:** 3  
 **Main Focus:** Social Media Campaign Performance  
 **Analysis:** Engagement, CTR, Conversion, ROI, Audience & Sentiment
+# 👥 Authors
+
+- **Shaik Ruksar**
+- **S. Sameer Basha**
