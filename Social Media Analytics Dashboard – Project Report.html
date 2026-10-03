@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Social Media Analytics Dashboard – Project Report</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--tx:#14213d;--mut:#5b6b85;--ac:#2563eb;--ac2:#06b6d4;--bd:#dbe3ef;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1220;--card:#121c30;--tx:#e8eefb;--mut:#9fb0cc;--bd:#243350}}
+:root[data-theme="dark"]{--bg:#0b1220;--card:#121c30;--tx:#e8eefb;--mut:#9fb0cc;--bd:#243350}
+html{scroll-behavior:smooth;scroll-padding-top:60px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{background:linear-gradient(135deg,#0f1b3d,#1d4ed8 60%,#06b6d4);color:#fff;padding:44px 20px 36px}
+.w{max-width:960px;margin:auto}
+header h1{margin:0 0 6px;font-size:clamp(1.6rem,4vw,2.4rem)}
+header p{margin:0;opacity:.9}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--bd);overflow-x:auto;white-space:nowrap}
+nav a{display:inline-block;padding:12px 14px;color:var(--mut);text-decoration:none;font-size:.9rem}
+nav a:hover{color:var(--ac)}
+section{padding:30px 20px}
+h2{margin:0 0 4px;font-size:1.5rem}
+h2 span{color:var(--ac);margin-right:8px}
+.sub{color:var(--mut);margin:0 0 16px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.kpi{text-align:center}.kpi b{display:block;font-size:2rem;color:var(--ac)}.kpi small{color:var(--mut)}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+button{font:inherit;cursor:pointer}
+.tab{border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:7px 14px;border-radius:99px;font-size:.88rem}
+.tab.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.bar{display:flex;align-items:center;gap:10px;margin:8px 0;cursor:pointer;padding:3px 6px;border-radius:8px}
+.bar:hover,.bar.sel{background:rgba(37,99,235,.1)}
+.bar .n{width:92px;font-size:.88rem;flex:none}
+.bar .t{flex:1;background:var(--bd);border-radius:6px;height:20px;overflow:hidden}
+.bar .f{height:100%;background:linear-gradient(90deg,var(--ac),var(--ac2));border-radius:6px;transition:width .5s}
+.bar .v{width:52px;text-align:right;font-weight:600;font-size:.9rem}
+.note{font-size:.88rem;color:var(--mut)}
+.pill{display:inline-block;background:rgba(37,99,235,.12);color:var(--ac);border-radius:99px;padding:2px 10px;font-size:.8rem;margin:2px}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{padding:8px 10px;border-bottom:1px solid var(--bd);text-align:left}
+th{color:var(--mut);font-weight:600}
+details{border:1px solid var(--bd);border-radius:10px;padding:10px 14px;margin:8px 0;background:var(--card)}
+summary{cursor:pointer;font-weight:600}
+code,pre{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.84rem}
+pre{background:rgba(127,127,127,.12);padding:10px;border-radius:8px;overflow-x:auto;margin:8px 0 0}
+.ed{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.ed label{font-size:.8rem;color:var(--mut);display:block}
+.ed input{width:100%;padding:9px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font:inherit}
+.rec{display:flex;gap:12px;align-items:flex-start}
+.rec i{flex:none;width:30px;height:30px;border-radius:50%;background:var(--ac);color:#fff;display:grid;place-items:center;font-style:normal;font-weight:700}
+.sc{display:flex;gap:8px;align-items:flex-end;height:170px;margin-top:10px}
+.sc div{flex:1;background:linear-gradient(0deg,var(--ac),var(--ac2));border-radius:8px 8px 0 0;position:relative;transition:.3s;cursor:pointer;min-height:10px}
+.sc div:hover{filter:brightness(1.15)}
+.sc div b{position:absolute;top:-22px;width:100%;text-align:center;font-size:.85rem}
+.sc div u{position:absolute;bottom:-24px;width:100%;text-align:center;font-size:.8rem;text-decoration:none;color:var(--mut)}
+footer{text-align:center;color:var(--mut);padding:26px 20px 40px;font-size:.85rem}
+@media print{nav{display:none}}
+</style></head><body>
+<header><div class="w">
+<p>PROJECT REPORT</p>
+<h1>Social Media Analytics Dashboard</h1>
+<p>Campaign Performance &amp; Audience Insights · Built with Power BI</p>
+</div></header>
+<nav><div class="w">
+<a href="#details">Personal Details</a><a href="#contents">Contents</a><a href="#overview">Overview</a><a href="#method">Method</a><a href="#pages">Dashboard Pages</a><a href="#explore">Explore Results</a><a href="#insights">Insights</a><a href="#recs">Recommendations</a><a href="#conclusion">Conclusion</a>
+</div></nav>
+
+<section id="details"><div class="w">
+<h2><span>01</span>Personal Details</h2>
+<p class="sub">Click any field and type. Your entries are kept in this browser where possible.</p>
+<div class="card ed" id="ed"></div>
+</div></section>
+
+<section id="contents"><div class="w">
+<h2><span>02</span>Table of Contents</h2>
+<div class="card"><table>
+<tr><td>1</td><td>Personal Details</td><td>Student, institution, guide</td></tr>
+<tr><td>2</td><td>Project Overview</td><td>Objective, scope, KPIs</td></tr>
+<tr><td>3</td><td>Methodology</td><td>Data, DAX measures, visuals, tools</td></tr>
+<tr><td>4</td><td>Dashboard Pages</td><td>Overview · Platform Analysis · Insights</td></tr>
+<tr><td>5</td><td>Explore Results</td><td>Interactive charts of the findings</td></tr>
+<tr><td>6</td><td>Key Insights</td><td>Four findings</td></tr>
+<tr><td>7</td><td>Business Recommendations</td><td>What marketers should do</td></tr>
+<tr><td>8</td><td>Limitations, Future Scope &amp; Conclusion</td><td>Next steps</td></tr>
+</table></div>
+</div></section>
+
+<section id="overview"><div class="w">
+<h2><span>03</span>Project Overview</h2>
+<p class="sub">What the project does and why it matters.</p>
+<div class="card"><b>Objective.</b> Analyze the performance of <b>2,000 social media campaigns</b> across multiple platforms and industries, so users can compare platforms, spot performance patterns and make data-driven marketing decisions.</div>
+<div class="grid">
+<div class="card kpi"><b>2K</b><small>Campaigns analyzed</small></div>
+<div class="card kpi"><b>72.6</b><small>Avg followers (as shown on dashboard)</small></div>
+<div class="card kpi"><b>35.4</b><small>Avg engagement</small></div>
+<div class="card kpi"><b>4.7</b><small>Avg conversion</small></div>
+<div class="card kpi"><b>173.2</b><small>Avg ROI</small></div>
+</div>
+<div class="card"><b>Metrics studied:</b><br>
+<span class="pill">Engagement rate</span><span class="pill">Click-through rate</span><span class="pill">Conversion rate</span><span class="pill">ROI</span><span class="pill">Followers</span><span class="pill">Posting frequency</span><span class="pill">Sentiment</span><span class="pill">Analytics maturity</span></div>
+<div class="card"><b>Platforms (6):</b> Instagram, Facebook, TikTok, X/Twitter, YouTube, LinkedIn.<br><b>Industries (7):</b> Travel, BFSI, Fashion, Technology, FMCG, Healthcare, E-commerce.</div>
+</div></section>
+
+<section id="method"><div class="w">
+<h2><span>04</span>Methodology</h2>
+<p class="sub">How the dashboard was built. Tap to expand.</p>
+<details open><summary>Step 1 · Data</summary>A dataset of 2,000 campaigns with platform, industry, engagement, CTR, conversion, ROI, followers, posting frequency, sentiment and analytics-maturity level.</details>
+<details><summary>Step 2 · Cleaning &amp; modelling (Power Query)</summary>Check data types, remove duplicates and blanks, and prepare columns for slicers and aggregation.</details>
+<details><summary>Step 3 · DAX measures for KPIs</summary>Illustrative examples of the kind of measures used (adjust to your column names):
+<pre>Total Campaigns = COUNTROWS('Dataset')
+Avg Engagement  = AVERAGE('Dataset'[Engagement Rate])
+Avg Conversion  = AVERAGE('Dataset'[Conversion Rate])
+Avg ROI         = AVERAGE('Dataset'[ROI])
+Avg Followers   = AVERAGE('Dataset'[Followers])</pre></details>
+<details><summary>Step 4 · Visualizations</summary>Cards (KPIs), bar and column charts (platform/industry comparison), donut (campaign distribution), scatter plot (analytics maturity vs ROI), gauge, matrix (platform summary) and slicers (Platform, Industry).</details>
+<details><summary>Step 5 · Interactivity &amp; navigation</summary>Platform and Industry slicers filter every visual. Navigation buttons (Executive Overview, Platform Analysis, Insights) move between pages.</details>
+</div></section>
+
+<section id="pages"><div class="w">
+<h2><span>05</span>Dashboard Pages</h2>
+<p class="sub">Select a page to see what it contains.</p>
+<div class="tabs" id="ptabs"></div>
+<div class="card" id="pbody"></div>
+</div></section>
+
+<section id="explore"><div class="w">
+<h2><span>06</span>Explore the Results</h2>
+<p class="sub">Values below are read from the dashboard screenshots. Pick a metric, then tap a bar.</p>
+<div class="card">
+<div class="tabs" id="mtabs"></div>
+<div id="pbars"></div>
+<p class="note" id="pnote"></p>
+</div>
+<div class="card"><b>Engagement by industry</b>
+<div id="ibars"></div></div>
+<div class="card"><b>Campaign share by platform</b> <span class="note">(total 2,000)</span>
+<div id="dist"></div></div>
+<div class="card"><b>Analytics maturity vs ROI</b> <span class="note">· approximate values read from the scatter plot; tap a bar</span>
+<div class="sc" id="sc"></div><p class="note" id="scn" style="margin-top:34px">Higher analytics maturity is associated with higher ROI in this dataset.</p></div>
+</div></section>
+
+<section id="insights"><div class="w">
+<h2><span>07</span>Key Insights</h2>
+<div class="card"><b>Insight 1 · Platform engagement.</b> LinkedIn and Instagram lead engagement (36.2 each); Facebook is lowest (33.8). The spread between platforms is small (about 2.4 points).</div>
+<div class="card"><b>Insight 2 · Business performance.</b> X/Twitter has the highest ROI (177.1), then YouTube (175.4). Facebook has the lowest (170.2). Travel (178.2) and Fashion (177.7) lead on ROI by industry.</div>
+<div class="card"><b>Insight 3 · Audience &amp; engagement.</b> The top engagement platforms are not the top converters: LinkedIn and Instagram have the lowest conversion (4.6 and 4.4), while TikTok, YouTube and X/Twitter reach 4.9. High engagement does not automatically mean high conversion.</div>
+<div class="card"><b>Insight 4 · Analytics maturity.</b> Campaigns with higher analytics maturity (Low → Medium → High → Advanced) show higher ROI.</div>
+<p class="note">Note: insights are based on the 2,000 campaigns in this dataset and should not be read as causal effects.</p>
+</div></section>
+
+<section id="recs"><div class="w">
+<h2><span>08</span>Business Recommendations</h2>
+<div class="card rec"><i>1</i><div><b>Compare platforms using multiple KPIs.</b><br>Look at engagement, CTR, conversion and ROI together, not one metric alone.</div></div>
+<div class="card rec"><i>2</i><div><b>Monitor engagement-to-conversion performance.</b><br>Check whether engaged audiences actually convert, especially on LinkedIn and Instagram.</div></div>
+<div class="card rec"><i>3</i><div><b>Compare campaign performance by industry.</b><br>Set benchmarks per industry; Travel and Fashion show the strongest ROI.</div></div>
+<div class="card rec"><i>4</i><div><b>Track analytics maturity.</b><br>Invest in measurement and reporting practices, which go along with better ROI.</div></div>
+</div></section>
+
+<section id="conclusion"><div class="w">
+<h2><span>09</span>Limitations, Future Scope &amp; Conclusion</h2>
+<div class="card"><b>Limitations.</b> Single dataset of 2,000 campaigns; differences between platforms are modest; relationships are correlations, not proof of cause.</div>
+<div class="card"><b>Future scope.</b> Add time-trend analysis, sentiment deep-dive, budget vs ROI, automated refresh and predictive modelling.</div>
+<div class="card"><b>Conclusion.</b> The Power BI dashboard turns 2,000 campaigns into a clear, filterable view of platform and industry performance. It shows that no single platform wins on every metric, so decisions should use several KPIs together. Its three pages (Overview, Platform Analysis, Insights &amp; Recommendations) let users move from a quick summary to actionable guidance.</div>
+</div></section>
+<footer>Social Media Analytics Dashboard · Project Report</footer>
+
+<script>
+const P=[
+{n:"LinkedIn",e:36.2,r:173.6,c:4.6,k:222},
+{n:"Instagram",e:36.2,r:170.8,c:4.4,k:527},
+{n:"X/Twitter",e:35.7,r:177.1,c:4.9,k:290},
+{n:"TikTok",e:35.6,r:174.5,c:4.9,k:305},
+{n:"YouTube",e:34.9,r:175.4,c:4.9,k:290},
+{n:"Facebook",e:33.8,r:170.2,c:4.8,k:366}];
+const I=[["Travel",36.9],["BFSI",36.9],["Fashion",36.2],["Technology",35.0],["FMCG",34.7],["Healthcare",34.7],["E-commerce",33.7]];
+const M={e:["Engagement rate",36.2*1.1],r:["ROI",177.1*1.08],c:["Conversion rate",4.9*1.1],k:["Campaigns",527*1.1]};
+const S=[["Low",141],["Medium",163],["High",191],["Advanced",209]];
+const PG=[
+["Overview","Executive summary page: slicers for Platform and Industry; KPI cards (campaigns, avg followers, avg engagement, avg ROI, avg conversion); Engagement Rate by Platform and ROI Performance by Platform bar charts; Engagement by Industry column chart; Campaign Distribution donut."],
+["Platform Analysis","Deeper comparison of platforms using CTR, conversion, ROI, followers, posting frequency and sentiment, with scatter plots, a gauge and a matrix for side-by-side reading."],
+["Insights & Recommendations","KPI cards, four insight headings, a Platform Performance Summary matrix, Analytics Maturity vs ROI scatter plot, ROI by Industry bar chart, a business recommendations panel and navigation buttons. A footnote reminds viewers that results are not causal."]];
+let m="e",sel=null;
+const $=s=>document.querySelector(s);
+function tabs(el,items,cur,fn){el.innerHTML="";items.forEach(([k,l])=>{const b=document.createElement("button");b.className="tab"+(k===cur?" on":"");b.textContent=l;b.onclick=()=>fn(k);el.appendChild(b)})}
+function bars(el,rows,max,fmt,onc,selN){el.innerHTML="";rows.forEach(([n,v])=>{const d=document.createElement("div");d.className="bar"+(n===selN?" sel":"");d.innerHTML=`<span class="n">${n}</span><span class="t"><span class="f" style="display:block;width:${v/max*100}%"></span></span><span class="v">${fmt(v)}</span>`;if(onc)d.onclick=()=>onc(n);el.appendChild(d)})}
+function drawP(){
+tabs($("#mtabs"),Object.entries(M).map(([k,v])=>[k,v[0]]),m,k=>{m=k;drawP()});
+const rows=P.map(p=>[p.n,p[m]]).sort((a,b)=>b[1]-a[1]);
+bars($("#pbars"),rows,M[m][1],v=>m=="k"?v:v.toFixed(1),n=>{sel=sel===n?null:n;drawP()},sel);
+const p=P.find(x=>x.n===sel);
+$("#pnote").innerHTML=p?`<b>${p.n}</b>: engagement ${p.e}, ROI ${p.r}, conversion ${p.c}, ${p.k} campaigns (${(p.k/20).toFixed(2)}%).`:"Tap a platform to see all of its numbers.";
+}
+function drawPg(i){
+tabs($("#ptabs"),PG.map((p,j)=>[j,p[0]]),i,drawPg);
+$("#pbody").innerHTML=`<b>${PG[i][0]}</b><p style="margin:6px 0 0">${PG[i][1]}</p>`}
+function drawSc(){
+const el=$("#sc");el.innerHTML="";S.forEach(([n,v])=>{const d=document.createElement("div");d.style.height=((v-100)/120*100)+"%";d.innerHTML=`<b>~${v}</b><u>${n}</u>`;d.onclick=()=>{$("#scn").textContent=`${n} analytics maturity: average ROI around ${v} (approximate).`};el.appendChild(d)})}
+drawP();drawPg(0);drawSc();
+bars($("#ibars"),I,40,v=>v.toFixed(1));
+bars($("#dist"),P.slice().sort((a,b)=>b.k-a.k).map(p=>[p.n,p.k]),600,v=>(v/20).toFixed(1)+"%");
+const F=["Student name","Register / Roll number","Degree & branch","College / University","Project guide","Submission date"];
+const ed=$("#ed");
+F.forEach((f,i)=>{let v="";try{v=localStorage.getItem("pd"+i)||""}catch(e){}
+const w=document.createElement("div");w.innerHTML=`<label>${f}</label><input placeholder="Enter ${f.toLowerCase()}" value="${v.replace(/"/g,"&quot;")}">`;
+w.querySelector("input").oninput=e=>{try{localStorage.setItem("pd"+i,e.target.value)}catch(x){}};ed.appendChild(w)});
+</script></body></html>
